@@ -1,13 +1,17 @@
 f = File.open("dictionary.txt")
 
-word_array = []
+dictionary = []
 
 while line = f.gets do
-    word_array << line
+    dictionary << line
 end
 
-puts word_array.length
+puts dictionary.length
 
-puts word_array.sample(1)
+dictionary.select! { |word| word.length >= 5 && word.length <= 12}
+
+puts dictionary.length
+
+puts dictionary.sample(1)
 
 f.close
