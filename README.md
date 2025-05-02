@@ -1,7 +1,7 @@
 Building a Hangman game for one player against the computer
 
-1 - Load the dictionary file
-2 - Convert dictionary to an array and select a word at random which is between 5 and 12 characters long
+1 - Load the dictionary file in logic - DONE
+2 - Convert dictionary to an array and select a word at random which is between 5 and 12 characters long - DONE
 3 - Display the number of blanks and guesses available 
     Ex. word is notification
     Display: _ _ _ _ _ _ _ _ _ _ - 0/7 guesses
