@@ -12,4 +12,9 @@ class Game
     @game.array_build
     @game.game_loop
   end
+
+  def load_game
+    @game.load_test
+    @game.game_loop
+  end
 end

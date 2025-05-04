@@ -3,7 +3,7 @@
 require 'yaml'
 
 class Logic
-  attr_accessor :word, :word_array
+  attr_accessor :word, :word_array, :code_array, :score, :wrong_answers
 
   def initialize
     @word = nil
@@ -59,9 +59,19 @@ class Logic
 
   def letter_input
     puts @code_array.join(' ')
-    print 'Please enter a letter: '
+    print 'Please enter a letter.  If you wish to save current game enter SAVE: '
     letter = gets.to_s.chomp
-    check(letter)
+    if letter == 'SAVE'
+      save_prompt
+      'Game has been saved!'
+    else
+      check(letter)
+    end
+  end
+
+  def save_prompt
+    save = to_yaml
+    File.open('saved_game.yml', 'w') { |file| file.write(save.to_yaml) }
   end
 
   def game_loop
@@ -75,13 +85,10 @@ class Logic
     game_over
   end
 
-  def save_prompt
-    print 'Would you like to save? Enter Y or N '
-    answer = gets.to_s.chomp
-    return unless answer == 'Y'
-
-    save = to_yaml
-    File.open('saved_game.yml', 'w') { |file| file.write(save.to_yaml) }
+  def load_test
+    data = YAML.safe_load(File.read('saved_game.yml'))
+    p data
+    new(data[:word], data[:word_array], data[:code_array], data[:score], data[:wrong_answers])
   end
 
   def game_over

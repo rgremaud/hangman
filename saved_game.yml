@@ -1,26 +1,29 @@
 --- |
   ---
-  :word: signing
+  :word: original
   :word_array:
-  - s
-  - i
-  - g
-  - "n"
-  - i
-  - "n"
-  - g
-  :code_array:
-  - s
-  - i
-  - _
-  - _
-  - i
-  - _
-  - _
-  :score: 5
-  :wrong_answers:
+  - o
   - r
+  - i
+  - g
+  - i
+  - "n"
+  - a
+  - l
+  :code_array:
+  - o
+  - r
+  - _
+  - g
+  - _
+  - _
+  - a
+  - _
+  :score: 6
+  :wrong_answers:
+  - p
+  - q
+  - u
   - t
   - e
-  - o
-  - a
+  - w
