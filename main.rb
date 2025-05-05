@@ -1,13 +1,14 @@
 require_relative 'lib/game'
 require_relative 'lib/logic'
 
-require 'yaml'
+require 'msgpack'
 
-new_game = Game.new
-# new_game.game_build
-new_game.load_game
+game = Game.new
+game.dictionary
+game.array_build
+p game
 
-# p new_game.to_yaml
-# new_game = new_game.from_yaml(new_game.to_yaml)
-# puts "Word #{new_game.word}"
-# puts "Word_array #{new_game.word_array}"
+msg = MessagePack.pack(game)
+p msg
+
+# attr_accessor :word, :word_array, :code_array, :score, :wrong_answers
