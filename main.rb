@@ -1,14 +1,18 @@
 require_relative 'lib/game'
 require_relative 'lib/logic'
 
-require 'msgpack'
+require 'yaml'
 
 game = Game.new
-game.dictionary
-game.array_build
+#game.dictionary
+#game.array_build
+#game.save_game
+
+game.from_yaml
 p game
 
-msg = MessagePack.pack(game)
-p msg
-
-# attr_accessor :word, :word_array, :code_array, :score, :wrong_answers
+# Process for saving a game
+# Check if saved game dir exists
+# if yes, push YAML file to the dir
+# if no, create the saved_game dir
+# then push YAML file to dir  

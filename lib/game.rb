@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'msgpack'
+require 'yaml'
 
 class Game
   attr_accessor :word, :word_array, :code_array, :score, :wrong_answers
@@ -10,7 +10,7 @@ class Game
     @word_array = []
     @code_array = []
     @score = 0
-    @wrong_answers = []
+    @wrong_answers = 0
   end
 
   def dictionary
@@ -80,13 +80,46 @@ class Game
   end
 
   def game_loop
-    dictionary
-    array_build
-    letter_loop
+    print "Would you like to load a saved game?  Please enter yes or no. "
+    answer = gets.to_s.chomp
+    if answer == "no"
+      dictionary
+      array_build
+      letter_loop
+    else
+      puts "Load a game fool"
+    end
   end
 
   def load_game
     load_test
     game_loop
   end
+
+  def to_yaml
+    YAML.dump(
+                'word' => @word,
+                'word_array' => @word_array,
+                'code_array' => @code_array,
+                'score' => @score,
+                'wrong_answers' => @wrong_answers
+              )
+    #File.open('saved_game.yml', 'w') { |file| file.write(data.to_yaml) }
+  end
+
+  def save_game
+    Dir.mkdir 'saved_games' unless Dir.exist? 'saved_games'
+    @filename = "saved_game.yaml"
+    File.open("saved_games/#{@filename}", 'w') { |file| file.write to_yaml }
+  end
+
+  def from_yaml
+    data = YAML.safe_load(File.read("saved_games/saved_game.yaml"))
+    @word = data['word']
+    @word_array = data['word_array']
+    @code_array = data['code_array']
+    @score = data['score']
+    @wrong_answers = data['wrong_answers']
+  end
+
 end
