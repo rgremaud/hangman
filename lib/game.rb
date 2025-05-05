@@ -10,7 +10,7 @@ class Game
     @word_array = []
     @code_array = []
     @score = 0
-    @wrong_answers = 0
+    @wrong_answers = []
   end
 
   def dictionary
@@ -52,7 +52,7 @@ class Game
     print 'Please enter a letter.  If you wish to save current game enter SAVE: '
     letter = gets.to_s.chomp
     if letter == 'SAVE'
-      save_prompt
+      save_game
       'Game has been saved!'
     else
       check(letter)
@@ -87,13 +87,9 @@ class Game
       array_build
       letter_loop
     else
-      puts "Load a game fool"
+      from_yaml
+      letter_loop
     end
-  end
-
-  def load_game
-    load_test
-    game_loop
   end
 
   def to_yaml
@@ -104,7 +100,6 @@ class Game
                 'score' => @score,
                 'wrong_answers' => @wrong_answers
               )
-    #File.open('saved_game.yml', 'w') { |file| file.write(data.to_yaml) }
   end
 
   def save_game

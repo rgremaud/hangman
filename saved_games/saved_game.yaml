@@ -1,20 +1,25 @@
 ---
-word: clinton
+word: richard
 word_array:
-- c
-- l
+- r
 - i
-- "n"
-- t
-- o
-- "n"
+- c
+- h
+- a
+- r
+- d
 code_array:
 - _
 - _
 - _
 - _
+- a
 - _
 - _
-- _
-score: 0
-wrong_answers: 0
+score: 5
+wrong_answers:
+- e
+- o
+- t
+- s
+- m
