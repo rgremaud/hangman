@@ -5,6 +5,7 @@ GEM
     json (2.11.3)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
+    msgpack (1.8.0)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
@@ -12,6 +13,7 @@ GEM
     prism (1.4.0)
     racc (1.8.1)
     rainbow (3.1.1)
+    random_name_generator (3.0.0)
     regexp_parser (2.10.0)
     rubocop (1.75.4)
       json (~> 2.3)
@@ -37,6 +39,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  msgpack
+  random_name_generator (~> 3.0)
   rubocop (~> 1.75)
 
 BUNDLED WITH

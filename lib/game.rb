@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require 'random_name_generator'
 
 class Game
   attr_accessor :word, :word_array, :code_array, :score, :wrong_answers
@@ -49,11 +50,12 @@ class Game
 
   def letter_input
     puts @code_array.join(' ')
-    print 'Please enter a letter.  If you wish to save current game enter SAVE: '
+    print 'Please enter a letter.  If you wish to save your game enter SAVE: '
     letter = gets.to_s.chomp
     if letter == 'SAVE'
       save_game
       'Game has been saved!'
+      exit
     else
       check(letter)
     end
@@ -80,36 +82,31 @@ class Game
   end
 
   def game_loop
-    print "Would you like to load a saved game?  Please enter yes or no. "
+    print 'Would you like to load a saved game?  Please enter yes or no. '
     answer = gets.to_s.chomp
-    if answer == "no"
+    if answer == 'no'
       dictionary
       array_build
-      letter_loop
     else
-      from_yaml
-      letter_loop
+      dir_files
+      file_name = gets.to_s.chomp
+      from_yaml(file_name)
     end
+    letter_loop
   end
 
   def to_yaml
     YAML.dump(
-                'word' => @word,
-                'word_array' => @word_array,
-                'code_array' => @code_array,
-                'score' => @score,
-                'wrong_answers' => @wrong_answers
-              )
+      'word' => @word,
+      'word_array' => @word_array,
+      'code_array' => @code_array,
+      'score' => @score,
+      'wrong_answers' => @wrong_answers
+    )
   end
 
-  def save_game
-    Dir.mkdir 'saved_games' unless Dir.exist? 'saved_games'
-    @filename = "saved_game.yaml"
-    File.open("saved_games/#{@filename}", 'w') { |file| file.write to_yaml }
-  end
-
-  def from_yaml
-    data = YAML.safe_load(File.read("saved_games/saved_game.yaml"))
+  def from_yaml(file_name)
+    data = YAML.safe_load(File.read("saved_games/#{file_name}.yaml"))
     @word = data['word']
     @word_array = data['word_array']
     @code_array = data['code_array']
@@ -117,4 +114,17 @@ class Game
     @wrong_answers = data['wrong_answers']
   end
 
+  def save_game
+    Dir.mkdir 'saved_games' unless Dir.exist? 'saved_games'
+    rng = RandomNameGenerator.new
+    @filename = "#{rng.compose(3)}.yaml"
+    File.open("saved_games/#{@filename}", 'w') { |file| file.write to_yaml }
+  end
+
+  def dir_files
+    puts 'Below is a list of all saved files (if available).'
+    puts 'Please enter the name of the file you wish to load: '
+    fls = (Dir.entries('saved_games').select { |f| File.file? File.join('saved_games', f) })
+    puts fls
+  end
 end

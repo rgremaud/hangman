@@ -1,0 +1,25 @@
+---
+word: stopping
+word_array:
+- s
+- t
+- o
+- p
+- p
+- i
+- "n"
+- g
+code_array:
+- _
+- _
+- o
+- p
+- p
+- i
+- "n"
+- _
+score: 3
+wrong_answers:
+- h
+- a
+- m

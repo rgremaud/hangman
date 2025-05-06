@@ -1,25 +1,26 @@
 ---
-word: richard
+word: physical
 word_array:
-- r
+- p
+- h
+- "y"
+- s
 - i
 - c
-- h
 - a
-- r
-- d
+- l
 code_array:
+- p
 - _
 - _
 - _
+- i
 - _
 - a
 - _
-- _
-score: 5
+score: 4
 wrong_answers:
-- e
-- o
 - t
-- s
-- m
+- o
+- r
+- t

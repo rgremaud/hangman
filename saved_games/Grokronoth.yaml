@@ -1,0 +1,24 @@
+---
+word: loaded
+word_array:
+- l
+- o
+- a
+- d
+- e
+- d
+code_array:
+- _
+- _
+- a
+- _
+- _
+- _
+score: 6
+wrong_answers:
+- p
+- r
+- t
+- r
+- s
+- m
