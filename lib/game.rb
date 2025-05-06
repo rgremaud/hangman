@@ -49,6 +49,7 @@ class Game
   end
 
   def letter_input
+    alphabet = *('a'..'z')
     puts @code_array.join(' ')
     print 'Please enter a letter.  If you wish to save your game enter SAVE: '
     letter = gets.to_s.chomp
@@ -56,6 +57,9 @@ class Game
       save_game
       'Game has been saved!'
       exit
+    elsif letter.length >= 2 || alphabet.include?(letter) == false
+      puts "Invalid letter."
+      letter_input
     else
       check(letter)
     end
@@ -87,10 +91,11 @@ class Game
     if answer == 'no'
       dictionary
       array_build
-    else
+    elsif answer == 'yes'
       dir_files
-      file_name = gets.to_s.chomp
-      from_yaml(file_name)
+    else
+      puts "Please enter a valid answer"
+      return game_loop
     end
     letter_loop
   end
@@ -126,5 +131,12 @@ class Game
     puts 'Please enter the name of the file you wish to load: '
     fls = (Dir.entries('saved_games').select { |f| File.file? File.join('saved_games', f) })
     puts fls
+    file_name = gets.to_s.chomp
+    if fls.include?("#{file_name}.yaml")
+      from_yaml(file_name)
+      File.delete("saved_games/#{file_name}.yaml")
+    else
+      dir_files
+    end
   end
 end
