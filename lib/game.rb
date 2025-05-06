@@ -86,13 +86,18 @@ class Game
   end
 
   def game_loop
+    dir_check = Dir.exist? 'saved_games'
+    fls = Dir.entries 'saved_games'
     print 'Would you like to load a saved game?  Please enter yes or no. '
     answer = gets.to_s.chomp
     if answer == 'no'
       dictionary
       array_build
-    elsif answer == 'yes'
+    elsif answer == 'yes' && dir_check == true && fls.length > 2
       dir_files
+    elsif answer == 'yes'
+      puts "There are no saved games.  Please start a new game."
+      game_loop
     else
       puts "Please enter a valid answer"
       return game_loop
@@ -139,4 +144,7 @@ class Game
       dir_files
     end
   end
+
+  
+
 end
